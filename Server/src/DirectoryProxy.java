@@ -24,6 +24,7 @@ public class DirectoryProxy {
 
 		case "PRINT":
 			response = Driver.remoteDirectory.print();
+			// response = "bananas";
 			break;
 
 		case "ADD":

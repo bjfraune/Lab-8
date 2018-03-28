@@ -18,12 +18,17 @@ public class MainDirectory {
 		directory.sort(new CompareEmployees());
 	}
 
-	public String print() {
+	// unused
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Employee person : directory) {
 			sb.append(person.toString() + System.lineSeparator());
 		}
 		return sb.toString();
+	}
+
+	public String print() {
+		return g.toJson(directory);
 	}
 
 	public void clear() {

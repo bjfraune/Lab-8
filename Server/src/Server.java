@@ -37,8 +37,8 @@ public class Server {
 		server.setExecutor(null); // creates a default executor
 
 		// get it going
-		System.out.println("Starting Server...");
 		server.start();
+		System.out.println("Server online.");
 	}
 
 	static class DisplayHandler implements HttpHandler {
@@ -112,7 +112,13 @@ public class Server {
 			// Desktop dt = Desktop.getDesktop();
 			// dt.open(new File("raceresults.html"));
 
-			String postResponse = DirectoryProxy.recieveJson(sb.toString());
+			String postResponse = "";
+			try {
+				postResponse = DirectoryProxy.recieveJson(sb.toString());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			System.out.println(Driver.remoteDirectory.print());
 
 			// assume that stuff works all the time
 			transmission.sendResponseHeaders(300, postResponse.length());

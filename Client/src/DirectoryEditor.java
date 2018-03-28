@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class DirectoryEditor {
 
@@ -84,17 +85,22 @@ public class DirectoryEditor {
 					System.out.println(BR + "*** Posting new employees to the server. ***");
 					String response = Client.postToServer("ADD " + g.toJson(localDirectory));
 					System.out.println("*** Posted. Server Response: " + response);
+
+					// if (server response is good)
+					localDirectory.clear();
+					// endif
+
 				}
 				break;
 			}
 			case "PRINT": {
-				String response = Client.postToServer("PRINT");
+				String response = Client.postToServer("PRINT ");
 				System.out.println(BR + "*** SERVER RESPONSE ***");
 				printJson(response);
 				break;
 			}
 			case "CLEAR": {
-				String response = Client.postToServer("CLEAR");
+				String response = Client.postToServer("CLEAR ");
 				System.out.println(BR + response);
 				break;
 			}
@@ -113,7 +119,9 @@ public class DirectoryEditor {
 
 	private static void printJson(String json) {
 		// need to decode json first...
-		System.out.println(json);
+		ArrayList<Employee> entries = (g.fromJson(json, new TypeToken<ArrayList<Employee>>() {
+		}.getType()));
+		System.out.println(entries.toString());
 	}
 
 }
